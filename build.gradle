@@ -1,0 +1,27 @@
+group 'codes.recursive'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+configurations {
+    localGroovyConf
+}
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    localGroovyConf localGroovy()
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile group: 'com.pi4j', name: 'pi4j-core', version: '1.1'
+    compile group: 'com.sparkjava', name: 'spark-template-thymeleaf', version: '2.5.5'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
+    compile 'com.sparkjava:spark-core:2.5.5'
+}
+
+task runServer(dependsOn: 'classes', type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'Bootstrap'
+}
